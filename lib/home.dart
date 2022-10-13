@@ -17,7 +17,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xff3d81ae),
+      // backgroundColor: const Color(0xff3d81ae),
       appBar: AppBar(
         backgroundColor: const Color(0xff2b5d7e),
         elevation: 0,
@@ -53,7 +53,7 @@ class _HomeState extends State<Home> {
                         left: 15,
                       ),
                       decoration: BoxDecoration(
-                        color: const Color(0xff19394c),
+                        // color: const Color(0xff19394c),
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Row(
@@ -91,7 +91,7 @@ class _HomeState extends State<Home> {
                                   style: const TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 40,
-                                    color: Colors.white,
+                                    color: Color(0xff19394c),
                                   ),
                                 ),
                               ),
@@ -109,15 +109,60 @@ class _HomeState extends State<Home> {
                               ),
                               trailing: IconButton(
                                 onPressed: () {
-                                  if (Books.id != null) {
-                                    Back.instance.deleteTodo(Books.id!);
-                                  }
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return AlertDialog(
+                                        title: const Text(
+                                            'Are U Sure U Want To Delete This Book?'),
+                                        actions: [
+                                          ElevatedButton(
+                                            style: ElevatedButton.styleFrom(
+                                              primary: const Color(0xff19394c),
+                                            ),
+                                            onPressed: () {
+                                              if (Books.id != null) {
+                                                Back.instance
+                                                    .deleteTodo(Books.id!);
+                                              }
+                                              setState(() {});
+                                              Navigator.pop(context);
+                                            },
+                                            child: const Text(
+                                              'Sure',
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 20,
+                                              ),
+                                            ),
+                                          ),
+                                          ElevatedButton(
+                                            style: ElevatedButton.styleFrom(
+                                              primary: const Color(0xff19394c),
+                                            ),
+                                            onPressed: () {
+                                              Navigator.pop(context);
+                                              setState(() {});
+                                            },
+                                            child: const Text(
+                                              'Cancel',
+                                              style: TextStyle(
+                                                color: Colors.red,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 20,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  );
                                   setState(() {});
                                 },
                                 icon: const Icon(
                                   Icons.delete,
                                   size: 55,
-                                  color: Colors.white,
+                                  color: Color(0xff19394c),
                                 ),
                               ),
                             ),
@@ -206,7 +251,7 @@ class _BottomSheetState extends State<BottomSheet> {
               child: TextFormField(
                 controller: Authocrcontroller,
                 decoration: const InputDecoration(
-                  suffix: Icon(Icons.person,color: Color(0xff19394c)),
+                  suffix: Icon(Icons.person, color: Color(0xff19394c)),
                   hintText: ' Book Author',
                   hintStyle: TextStyle(
                     fontSize: 30,
@@ -224,7 +269,7 @@ class _BottomSheetState extends State<BottomSheet> {
               child: TextFormField(
                 controller: Urlcontroller,
                 decoration: const InputDecoration(
-                  suffix: Icon(Icons.image,color: Color(0xff19394c)),
+                  suffix: Icon(Icons.image, color: Color(0xff19394c)),
                   hintText: ' Book Cover Url',
                   hintStyle: TextStyle(
                     fontSize: 30,
@@ -239,13 +284,13 @@ class _BottomSheetState extends State<BottomSheet> {
               height: 30,
             ),
             Container(
-            color:const Color(0xff19394c),
+              color: const Color(0xff19394c),
               height: 50,
               width: 100,
               child: ElevatedButton(
-               style: ElevatedButton.styleFrom(
-                 primary:const Color(0xff19394c),
-               ),
+                style: ElevatedButton.styleFrom(
+                  primary: const Color(0xff19394c),
+                ),
                 onPressed: () {
                   Back.instance.insertTodo(
                     Data(
